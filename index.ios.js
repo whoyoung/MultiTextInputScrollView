@@ -9,7 +9,6 @@ import {
   AppRegistry,
   StyleSheet,
   TextInput,
-  View,
   ScrollView,
   Keyboard,
   Dimensions
@@ -64,7 +63,7 @@ export default class MultiTextInputScrollView extends Component {
   _scrollViewTo(offsetY) {
     this.refs.scroll.scrollTo({ y: offsetY, animated: true });
   }
-  
+
   _inputArray(rowNum) {
     if (rowNum < 1) return null;
     let tempArray = [];
