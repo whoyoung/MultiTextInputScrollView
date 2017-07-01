@@ -8,25 +8,21 @@ import React, { Component } from 'react';
 import {
   AppRegistry,
   StyleSheet,
-  Text,
-  View
+  TextInput,
+  View,
+  ScrollView
 } from 'react-native';
 
 export default class MultiTextInputScrollView extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
-      </View>
+      <ScrollView contentContainerStyle={styles.container} keyboardDismissMode='on-drag' 
+      keyboardShouldPersistTaps='handled'
+      >
+        <TextInput style={styles.inputStyle} 
+        autoFocus={false} multiline={true} ref='input1'
+        />
+      </ScrollView>
     );
   }
 }
@@ -34,14 +30,19 @@ export default class MultiTextInputScrollView extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
     backgroundColor: '#F5FCFF',
+    paddingTop:20
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
+  inputStyle: {
+    height:50, 
     margin: 10,
+    textAlign:'left',
+    borderColor:'gray',
+    borderRadius:5,
+    borderWidth:1,
+    paddingHorizontal:5
   },
   instructions: {
     textAlign: 'center',
