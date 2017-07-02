@@ -56,7 +56,6 @@ export default class MultiTextInputScrollView extends Component {
     if (this.needMove || this.moveHeight) {
       this._scrollViewTo(this.moveH);
     }
-    this.focus = null;
   }
 
   _scrollViewTo(offsetY) {
