@@ -25,6 +25,7 @@ export default class MultiTextInputScrollView extends Component {
     this.focus = null;
     this.needMove = false;
     this.inputs = this._inputArray(10);
+    this.moveHeight = 0;
   }
 
   componentDidMount() {
@@ -45,14 +46,14 @@ export default class MultiTextInputScrollView extends Component {
       let leftHeight = screenHeight - py;//输入框距离底部的距离 = （屏幕的高度 - 当前TextInput的高度）
       if (leftHeight < e.startCoordinates.height + rowHeight) {
         this.needMove = true;
-        let moveHeight = e.startCoordinates.height + rowHeight - leftHeight;
-        this._scrollViewTo(this.moveH + moveHeight);
+        this.moveHeight = e.startCoordinates.height + rowHeight - leftHeight;
+        this._scrollViewTo(this.moveH + this.moveHeight);
       }
     });
   }
 
   _keyboardDidHide = () => {
-    if (this.needMove) {
+    if (this.needMove || this.moveHeight) {
       this._scrollViewTo(this.moveH);
     }
     this.focus = null;
@@ -79,12 +80,13 @@ export default class MultiTextInputScrollView extends Component {
   render() {
     return (
       <ScrollView contentContainerStyle={styles.container} keyboardDismissMode='on-drag'
-        keyboardShouldPersistTaps='always' ref='scroll'
+        keyboardShouldPersistTaps='handled' ref='scroll'
         onContentSizeChange={(contentWidth, contentHeight) => {
           this.contentHeight = parseInt(contentHeight);
         }}
         onScrollEndDrag={(e) => {
           this.moveH = e.nativeEvent.targetContentOffset.y;
+          this.moveHeight = 0;
           console.log('nativeEvent==' + JSON.stringify(e.nativeEvent));
         }}
       >
